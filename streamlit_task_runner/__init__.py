@@ -7,8 +7,8 @@ import streamlit as st
 from beartype import beartype
 from beartype.typing import List
 
-stdout_file = "/Users/srinivas/Desktop/STDOUT.txt"
-stderr_file = "/Users/srinivas/Desktop/STDERR.txt"
+stdout_file = "/tmp/STDOUT.txt"
+stderr_file = "/tmp/STDERR.txt"
 
 
 def _start():
