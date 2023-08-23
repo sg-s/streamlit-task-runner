@@ -33,7 +33,6 @@ async def _update_task_log(
     """
 
     stdout_file = f"/tmp/STDOUT-{nonce}.txt"
-    stderr_file = f"/tmp/STDERR-{nonce}.txt"
 
     go_on = True
     while go_on:
@@ -113,6 +112,7 @@ def run_task(
             _update_task_log(
                 container=container,
                 process=process,
+                nonce=nonce,
             )
         )
 
