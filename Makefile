@@ -20,3 +20,15 @@ coverage-report: .coverage
 	poetry run coverage html --omit="*/test*"
 	open htmlcov/index.html
 
+
+start-app: stop-app
+	@echo "Starting streamlit app.."
+	@bash start-app.sh
+
+stop-app:
+	@echo "Stopping streamlit app..."
+	-kill $(PID)
+
+
+restart-app: stop-app start-app
+	@echo "Restarting app..."

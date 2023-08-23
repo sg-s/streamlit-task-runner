@@ -1,0 +1,1 @@
+nohup poetry run streamlit run task_runner.py > /dev/null 2>&1 & echo $! > streamlit.pid

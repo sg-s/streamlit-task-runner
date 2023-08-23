@@ -1,0 +1,7 @@
+[server]
+port = 8555
+runOnSave = true
+enableCORS = true
+
+[browser]
+gatherUsageStats = false
