@@ -7,9 +7,6 @@ import streamlit as st
 from beartype import beartype
 from beartype.typing import List
 
-stdout_file = "/tmp/STDOUT.txt"
-stderr_file = "/tmp/STDERR.txt"
-
 
 def _start():
     """set up task_runner dict in session state
@@ -25,6 +22,7 @@ async def _update_task_log(
     *,
     process: subprocess.Popen,
     container: st.delta_generator.DeltaGenerator,
+    nonce: str = "",
 ):
     """Core event loop. Checks process for completion
     and checks stdout file. Updates container with contents
@@ -33,6 +31,10 @@ async def _update_task_log(
     Do not call this directly.
 
     """
+
+    stdout_file = f"/tmp/STDOUT-{nonce}.txt"
+    stderr_file = f"/tmp/STDERR-{nonce}.txt"
+
     go_on = True
     while go_on:
         # check if process is still running
@@ -86,6 +88,7 @@ def run_task(
     *,
     command: List[str],
     container,
+    nonce: str = "",
 ):
     _start()
     hash = _hash_command(command)
@@ -94,6 +97,9 @@ def run_task(
         stdout=None,
         stderr=None,
     )
+
+    stdout_file = f"/tmp/STDOUT-{nonce}.txt"
+    stderr_file = f"/tmp/STDERR-{nonce}.txt"
 
     with open(stdout_file, "w") as stdout, open(stderr_file, "w") as stderr:
         process = subprocess.Popen(

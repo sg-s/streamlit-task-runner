@@ -1,5 +1,10 @@
+import uuid
+
 import streamlit as st
 from streamlit_task_runner import run_task, show_results
+
+nonce = str(uuid.uuid4())[:5]
+
 
 st.write("# Task runner")
 st.write(
@@ -30,7 +35,11 @@ empty_container = st.empty()
 do_stuff = st.button(
     "Run",
     on_click=run_task,
-    kwargs={"command": cmd, "container": empty_container},
+    kwargs=dict(
+        command=cmd,
+        container=empty_container,
+        nonce=nonce,
+    ),
 )
 
 show_results(command=cmd)

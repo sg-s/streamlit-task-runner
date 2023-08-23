@@ -1,5 +1,5 @@
 
-
+PID := $(shell cat streamlit.pid)
 
 .PHONY: test coverage-report jupyter
 
